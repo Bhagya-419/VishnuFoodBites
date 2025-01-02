@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishnu Food Bites</title>
+    <style>
+        /* General Reset */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f1; /* Light cream background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Remove scrollbars */
+        }
+        a{
+            text-decoration: none;
+            color:inherit;
+        }
+        /* Header Styling */
+        header {
+            background-color: #1e3a5f; /* Rich navy blue */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-left h1 {
+            margin: 0;
+            font-size: 28px; /* Larger font size */
+        }
+        .header-center {
+            flex: 1;
+            text-align: center;
+        }
+        .header-center input {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #1e3a5f; /* Navy blue border for search bar */
+            border-radius: 6px;
+            width: 500px;
+        }
+
+        /* Right Links: Home, Login, and Logout */
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        .header-right a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 35px;
+        }
+        .header-right a:hover {
+            text-decoration: none;
+        }
+
+        /* Food Stall Horizontal Layout */
+        main {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            flex-wrap: wrap;
+            padding-top: 5px;
+        }
+        .stall {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border: 1px solid #e4d8b7; /* Light cream border */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+            transition: transform 0.3s ease;
+            width: 320px;
+            height: 380px;
+            gap: 20px;
+        }
+        
+        .stall:hover {
+            transform: scale(1.05);
+        }
+        .stall img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .stall-details {
+            padding: 10px;
+            font-size: 18px;
+            color: #1e3a5f; /* Navy blue text for stall details */
+            font-weight: bold;
+            text-align: center;
+            flex-shrink: 0;
+            
+        }
+        .stall-details a{
+            text-decoration: none;
+            color:inherit;
+        }
+
+        /* No Results Message */
+        #no-results {
+            display: none;
+            text-align: center;
+            font-size: 20px;
+            color: #ee4747;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <!-- Left: Logo -->
+        <div class="header-left">
+            <h1>Vishnu Food Bites</h1>
+        </div>
+        <!-- Center: Search Bar -->
+        <div class="header-center">
+            <input type="text" id="search-bar" placeholder="Search..." onkeyup="searchStalls()">
+        </div>
+        <!-- Right: Home, Login, and Logout -->
+        <div class="header-right">
+            <a href="login.html">LOGOUT</a>
+            <a href="signup.html">SIGNOUT</a>
+            <a href="addtocart.html" class="cart-icon">CART 🛒</a>
+        </div>
+    </header>
+
+    <!-- Food Stall Section -->
+    <main id="stall-container">
+        <!-- Food Stall 1 -->
+        <a href="fooditems1.html" >
+        <div class="stall" data-name="TEMPLE SQUARE">
+            <img src="https://i.pinimg.com/236x/0a/65/bd/0a65bd88669848638b178886acdf2aa0.jpg" alt="Temple Square">
+            <div class="stall-details">TEMPLE SQUARE</div>
+        </div>
+    </a>
+        <!-- Food Stall 2 -->
+        <a href="fooditems2.html">
+        <div class="stall" data-name="CENTRAL SQUARE">
+            <img src="https://i.pinimg.com/236x/0c/93/85/0c93854f0852cbef06a59b724d4397fd.jpg" alt="Central Square">
+            <div class="stall-details">CENTRAL SQUARE</div>
+            
+        </div>
+    </a>
+        <!-- Food Stall 3 -->
+        <a href="fooditems3.html">
+        <div class="stall" data-name="YUMMIE">
+            <img src="https://i.pinimg.com/736x/9e/74/e5/9e74e5515f7c9fded7ffb2a8dd937c4e.jpg" alt="Yummie">
+            <div class="stall-details">YUMMIE</div>
+            
+        </div>
+    </a>
+        <!-- Food Stall 4 -->
+        <a href="fooditems4.html">
+        <div class="stall" data-name="JUICY DRINKS">
+            <img src="https://i.pinimg.com/236x/9d/e8/f0/9de8f042c9e11c35939db2398d72bc45.jpg" alt="Juicy Drinks">
+            <div class="stall-details">JUICY DRINKS</div>
+        </div>
+    </a>
+    </main>
+
+    <!-- No Results Message -->
+    <div id="no-results">No results found.</div>
+
+    <!-- JavaScript for Search Feature -->
+    <script>
+        function searchStalls() {
+            const searchInput = document.getElementById('search-bar').value.toUpperCase();
+            const stalls = document.querySelectorAll('.stall');
+            const noResultsMessage = document.getElementById('no-results');
+            let hasResults = false;
+
+            stalls.forEach(stall => {
+                const stallName = stall.getAttribute('data-name');
+                if (stallName.includes(searchInput)) {
+                    stall.style.display = 'flex';
+                    hasResults = true;
+                } else {
+                    stall.style.display = 'none';
+                }
+            });
+
+            // Show "No results found" if nothing matches
+            if (hasResults) {
+                noResultsMessage.style.display = 'none';
+            } else {
+                noResultsMessage.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

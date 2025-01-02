@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishnu Food Bytes - Admin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #001f3d; /* Navy Blue */
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .header-left, .header-right {
+            display: flex;
+            gap: 20px;
+        }
+        .header-left a, .header-right a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .header-left a:hover, .header-right a:hover {
+            color: #ff6347; /* Change color on hover */
+        }
+        .header-center {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .shop-list {
+            width: 100%;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* Display shops in a column */
+            align-items: center; /* Center align items */
+        }
+        .shop-list li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 10px 0;  /* Space between each box */
+            padding: 30px;
+            border-radius: 5px;
+            font-size: 25px;
+            text-align: center;
+            width: 80%; /* Make the shop box take 80% of the page width */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .arrow {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-left: 5px solid #001f3d;
+            border-top: 5px solid #001f3d;
+            transform: rotate(135deg); /* Rotate the arrow to point right */
+            cursor: pointer;
+        }
+        .arrow:hover {
+            border-left-color: #000;
+            border-top-color: #000;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <a href="a1.html">&#8592; Back</a> <!-- Back button -->
+    </div>
+    <div class="header-center">
+        Vishnu Food Bites
+    </div>
+    <div class="header-right">
+        <a href="login.html">Logout</a>
+    </div>
+</header>
+
+<ul class="shop-list">
+    <li onclick="navigateToPage('adminfood1.html')">
+        Temple Square
+        <a href="adminfood1.html" class="arrow"></a> 
+    </li>
+    <li onclick="navigateToPage('adminfood3.html')">
+        Central Square
+        <a href="adminfood2.html" class="arrow"></a> 
+    </li>
+    <li onclick="navigateToPage('adminfood2.html')">
+        Yummie
+        <a href="adminfood3.html" class="arrow"></a> 
+    </li>
+    <li onclick="navigateToPage('adminfood4.html')">
+        Juicy Drinks
+        <a href="adminfood4.html" class="arrow"></a> 
+    </li>
+</ul>
+<!-- <ul class="list">
+    <li onclick="navigateToPage('temple-square.html')">
+        Temple Square
+        <span class="arrow">➡</span>
+    </li>
+    <li onclick="navigateToPage('central-square.html')">
+        Central Square
+        <span class="arrow">➡</span>
+    </li>
+    <li onclick="navigateToPage('juicy-drinks.html')">
+        Juicy Drinks
+        <span class="arrow">➡</span>
+    </li>
+    <li onclick="navigateToPage('yummie.html')">
+        Yummie
+        <span class="arrow">➡</span>
+    </li>
+</ul> -->
+
+<script>
+    function navigateToPage(page) {
+        window.location.href = page;
+    }
+</script>
+
+
+</body>
+</html>

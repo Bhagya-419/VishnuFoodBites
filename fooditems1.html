@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishnu Food Bytes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; /* Remove default margin to avoid gaps */
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            background-color: #1e3a5f; /* Rich navy blue */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%; /* Full viewport width */
+            box-sizing: border-box;
+            position: fixed; /* Optional: To make the header stay on top */
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+        main{
+            margin-top: 60px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: white;
+        }
+
+        .header .search-bar {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header .search-bar input {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            width: 500px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: none;
+        }
+
+        /* Default button style */
+        .add-to-cart {
+            background-color: #16324a;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            transform: translateY(-10px);
+        }
+
+
+        /* Added to cart style */
+        .added {
+            background-color: rgb(11, 229, 11);
+            color: black;
+        }
+
+        .tick {
+            margin-left: 5px;
+            font-size: 1.2em;
+            color: black;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 80px;
+            font-size: 36px;
+            color: #1e3a5f;
+        }
+
+        h3{
+            text-align:center;
+            margin-top:40px;
+            font-size:28px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px 40px;
+            justify-items: center;
+            margin-top: 50px; /* To avoid overlap with fixed header */
+        }
+
+        .product-card {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+            transition: transition 0.3s ease;
+        }
+
+        .product-card img:hover {
+            transform: scale(1.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            font-size: 20px;
+            color: #333;
+            padding: 10px 0;
+            margin: 0;
+        }
+
+        .product-card p.price {
+            font-size: 16px;
+            color: green;
+            padding: 5px 0;
+        }
+
+        .product-card p.availability {
+            font-size: 18px;
+            padding: 5px 0;
+            color: #777;
+        }
+
+        .in-stock {
+            color: green; /* Green for in-stock */
+            animation: continuousPopUp 1s ease-in-out infinite; /* Continuous animation */
+        }
+
+        .out-of-stock {
+            color: red; /* Red for out-of-stock */
+            animation: continuousPopUp 1s ease infinite; /* Continuous animation */
+        }
+
+        @keyframes continuousPopUp {
+            0%, 100% {
+                transform: scale(1); /* Normal size */
+            }
+            50% {
+                transform: scale(1.2); /* Slightly larger */
+            }
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .availability {
+            animation: continuousPopUp 1s ease-in-out infinite; /* Infinite animation */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1>Vishnu Food Bites</h1>
+        <div class="search-bar">
+            <!-- Search Bar -->
+            <input type="text" id="search-input" placeholder="Search for food items..." />
+        </div>
+        <div class="nav-links">
+            <a href="Untitled-1.html">Home</a>
+            <a href="U2.html">Logout</a>
+            <a href="addtocart.html" class="cart-icon">Cart 🛒</a>
+        </div>
+    </div>
+
+    <h1>TEMPLE SQUARE</h1>
+    <h3>Timings:9:30AM-6:30PM(Sun-Sat)</h3>
+    <div class="container" id="product-container">
+        <!-- Product 1 -->
+        <div class="product-card" data-name="milkshakes">
+            <img src="https://media.istockphoto.com/id/926990564/photo/chocolate-milk-and-whipped-cream.jpg?s=612x612&w=0&k=20&c=LabS3iGKio9kYS7OUGsosTm0Bb4XKY8WkXPer_RU3IQ=" alt="Milkshakes">
+            <h3>Milkshakes</h3>
+            <p class="price"><b>₹100</b></p>
+            <p class="availability in-stock">In Stock</p>
+            <button class="add-to-cart" data-name="Milkshakes" data-price="100">Add to Cart</button>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card" data-name="Cooldrinks">
+            <img src="https://png.pngtree.com/thumb_back/fh260/background/20241217/pngtree-a-refreshing-group-of-drinks-with-ice-cubes-and-lemon-slices-image_16767336.jpg" alt="Cool Drinks">
+            <h3>Cool Drinks</h3>
+            <p class="price"><b>₹20</b></p>
+            <p class="availability out-of-stock">Out of Stock</p>
+            <button class="add-to-cart" data-name="Cool Drinks" data-price="20">Add to Cart</button>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card" data-name="cakes">
+            <img src="https://merakcakes.com/cdn/shop/files/VanillaChocoChipsCake.jpg?v=1713853502" alt="Cakes">
+            <h3>Cakes</h3>
+            <p class="price"><b>₹70</b></p>
+            <p class="availability in-stock">In Stock</p>
+            <button class="add-to-cart" data-name="Cakes" data-price="70">Add to Cart</button>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card" data-name="icecreams">
+            <img src="https://cdn.britannica.com/50/80550-050-5D392AC7/Scoops-kinds-ice-cream.jpg" alt="Ice creams">
+            <h3>Ice creams</h3>
+            <p class="price"><b>₹75</b></p>
+            <p class="availability in-stock">In Stock</p>
+            <button class="add-to-cart" data-name="Ice creams" data-price="75">Add to Cart</button>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card" data-name="brownie">
+            <img src="https://handletheheat.com/wp-content/uploads/2017/03/chewy-brownies-SQUARE.jpg" alt="Brownie">
+            <h3>Brownie</h3>
+            <p class="price"><b>₹60</b></p>
+            <p class="availability out-of-stock">Out of Stock</p>
+            <button class="add-to-cart" data-name="Brownie" data-price="60">Add to Cart</button>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card" data-name="rolls">
+            <img src="https://www.thespruceeats.com/thmb/Yepl0s9b4UVhGu-7RPmVSVfuZ7c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/SES-chicken-egg-roll-recipe-694514-4f9643906aa44fa0b8a8f3ed3b85e860.jpg" alt="Rolls">
+            <h3>Rolls</h3>
+            <p class="price"><b>₹35</b></p>
+            <p class="availability in-stock">In Stock</p>
+            <button class="add-to-cart" data-name="Rolls" data-price="35">Add to Cart</button>
+        </div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById("search-input");
+        const products = document.querySelectorAll(".product-card");
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+        let debounceTimer;
+        searchInput.addEventListener("input", () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                const query = searchInput.value.toLowerCase();
+                products.forEach(product => {
+                    const productName = product.getAttribute("data-name").toLowerCase();
+                    product.style.display = productName.includes(query) ? "block" : "none";
+                });
+            }, 300);
+        });
+    
+        window.addEventListener("load", () => {
+            const availabilityText = document.querySelectorAll(".availability");
+    
+            availabilityText.forEach(element => {
+                element.style.animation = "none"; // Reset animation
+                setTimeout(() => {
+                    element.style.animation = ""; // Reapply the animation
+                }, 10); // Small delay to allow reapplication
+            });
+    
+            // Check stock and update button states
+            document.querySelectorAll(".product-card").forEach((product) => {
+                const availability = product.querySelector(".availability").textContent.toLowerCase();
+                const button = product.querySelector(".add-to-cart");
+    
+                if (availability.includes("out of stock")) {
+                    button.disabled = true;
+                    button.textContent = "Out of Stock";
+                    button.style.backgroundColor = "#ccc"; // Gray background
+                    button.style.color = "#666"; // Disabled text color
+                    button.style.cursor = "not-allowed"; // Disabled cursor
+                }
+            });
+    
+            // Restore cart state
+            cart.forEach(item => {
+                const button = Array.from(document.querySelectorAll('.add-to-cart')).find(btn => btn.getAttribute('data-name') === item.name);
+                if (button) {
+                    button.classList.add('added');
+                    button.textContent = "Added to Cart ✔";
+                    button.style.backgroundColor = "green";
+                    button.style.color = "black";
+                }
+            });
+        });
+    
+        document.querySelectorAll('.add-to-cart').forEach((button) => {
+            button.addEventListener('click', function () {
+                if (this.disabled) return; // Do nothing if the button is disabled
+    
+                const itemName = this.getAttribute('data-name');
+                const itemPrice = this.getAttribute('data-price');
+    
+                if (this.classList.contains('added')) {
+                    // Revert to "Add to Cart" state
+                    this.textContent = "Add to Cart";
+                    this.classList.remove('added');
+                    this.style.backgroundColor = "#16324a"; // Blue background
+                    this.style.color = "white"; // White text
+    
+                    // Remove item from cart
+                    const index = cart.findIndex(item => item.name === itemName);
+                    if (index > -1) {
+                        cart.splice(index, 1);
+                    }
+                } else {
+                    // Switch to "Added to Cart" state
+                    this.classList.add('added');
+                    this.textContent = "Added to Cart ✔";
+                    this.style.backgroundColor = "green"; // Green background
+                    this.style.color = "black"; // Black text
+    
+                    // Add item to cart
+                    cart.push({ name: itemName, price: itemPrice });
+                }
+    
+                // Save cart to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+            });
+        });
+    </script>
+    
+</body>
+</html>

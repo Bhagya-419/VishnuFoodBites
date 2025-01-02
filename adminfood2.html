@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishnu Food Bytes - Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #001f3d; /* Navy Blue */
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .header-left, .header-right {
+            display: flex;
+            gap: 20px;
+        }
+        .header-left a, .header-right a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .header-left a:hover, .header-right a:hover {
+            color: #ff6347; /* Change color on hover */
+        }
+        .header-center {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .search-container {
+            padding: 20px;
+            text-align: center;
+            margin-top: 1px;
+        }
+        .search-container input {
+            width: 80%;
+            height: 40px;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        .headings {
+    width: 80%;
+    margin: 0 auto 10px; /* Reduce gap between search bar and headings */
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr; /* Adjust column sizes */
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+.headings div:nth-child(3) { /* Specifically target the third column (Number of Items) */
+    text-align: right; /* Move the heading to the right */
+    padding-right: 10px; /* Add padding to align with input fields */
+}
+
+        .price-heading {
+            text-align: right; /* Align price heading to the right */
+            padding-left:500px; /* Add space between heading and next column */
+        }
+        .headings div {
+            text-align: left;
+        }
+        .food-list {
+            width: 100%;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .food-list li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 10px 0; /* Space between each food item */
+            padding: 20px;
+            border-radius: 5px;
+            font-size: 20px;
+            text-align: left;
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .food-list li input {
+            width: 120px;
+            height: 35px;
+            font-size: 16px;
+            padding: 5px;
+            margin-left: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .submit-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .submit-container button {
+            background-color: #001f3d;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-container button:hover {
+            background-color: #ff6347;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+        .modal-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .modal-content button {
+            background-color: #001f3d;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal-content button:hover {
+            background-color: #ff6347;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <a href="admin1.html">&#8592; Back</a> <!-- Back button -->
+    </div>
+    <div class="header-center">
+        Vishnu Food Bites - Central Square
+    </div>
+    <div class="header-right">
+        <a href="login.html">Logout</a>
+    </div>
+</header>
+
+<!-- Search bar to filter food items -->
+<div class="search-container">
+    <input type="text" id="foodSearch" placeholder="Search for food items..." onkeyup="filterFoodItems()">
+</div>
+
+<!-- Headings for the list -->
+<div class="headings">
+    <div>Item Name</div>
+    <div class="price-heading">Price</div>
+    <div>No.of.Items</div>
+</div>
+
+
+<ul class="food-list" id="foodList">
+    <li class="food-item">
+        Coffee
+        <div>
+            <input type="number" placeholder="Price" min="0" value="20">
+            <input type="number" placeholder="Number of Items" min="0" value="15">
+        </div>
+    </li>
+    <li class="food-item">
+        Chocolates
+        <div>
+            <input type="number" placeholder="Price" min="0" value="25">
+            <input type="number" placeholder="Number of Items" min="0" value="25">
+        </div>
+    </li>
+    <li class="food-item">
+        Sandwich
+        <div>
+            <input type="number" placeholder="Price" min="0" value="60">
+            <input type="number" placeholder="Number of Items" min="0" value="8">
+        </div>
+    </li>
+    <li class="food-item">
+        Chiken puffs
+        <div>
+            <input type="number" placeholder="Price" min="0" value="40">
+            <input type="number" placeholder="Number of Items" min="0" value="13">
+        </div>
+    </li>
+    <li class="food-item">
+        Veg puffs
+        <div>
+            <input type="number" placeholder="Price" min="0" value="35">
+            <input type="number" placeholder="Number of Items" min="0" value="16">
+        </div>
+    </li>
+    <li class="food-item">
+        Lays/kurkure
+        <div>
+            <input type="number" placeholder="Price" min="0" value="10">
+            <input type="number" placeholder="Number of Items" min="0" value="32">
+        </div>
+    </li>
+</ul>
+
+<div class="submit-container">
+    <button onclick="saveData()">Submit</button>
+</div>
+
+<!-- Modal -->
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <p>Your data has been saved successfully!</p>
+        <button onclick="closeModal()">OK</button>
+    </div>
+</div>
+
+<script>
+    function filterFoodItems() {
+        const input = document.getElementById('foodSearch').value.toLowerCase();
+        const foodItems = document.querySelectorAll('.food-item');
+        foodItems.forEach(item => {
+            const foodName = item.textContent.toLowerCase();
+            item.style.display = foodName.includes(input) ? '' : 'none';
+        });
+    }
+
+    function saveData() {
+        const foodItems = document.querySelectorAll('.food-item');
+        const data = [];
+        
+        foodItems.forEach(item => {
+            const foodName = item.textContent.trim();
+            const price = item.querySelector('input[placeholder="Price"]').value;
+            const quantity = item.querySelector('input[placeholder="Number of Items"]').value;
+
+            data.push({ foodName, price, quantity });
+        });
+
+        console.log(data); // For debugging, log the data to the console
+
+        // Show the modal
+        document.getElementById('successModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('successModal').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
